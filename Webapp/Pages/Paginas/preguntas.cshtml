@@ -1,0 +1,62 @@
+@page
+@model PreguntasModel
+
+<header><button type="button" class="btn btn-primary btn-lg text-right" data-toggle="modal" data-target="#miModal">Listado de Participantes</button></header>
+<br>
+<div class="text-center">
+    <font face="Star Wars" color=131F69>
+        <h1>Inscripcion para el Concurso de @Model.concurso</h1>
+    </font>
+</div>
+
+<form method="post">
+    <p>Nombre: <input asp-for="concursante.nombre" class="form-control" placeholder="Ingrese su nombre" required/><br /></p>
+    <p>Apellido: <input asp-for="concursante.apellido" class="form-control" placeholder="Ingrese su apellido" required/><br /></p>
+    <p>Edad:  <input asp-for="concursante.edad" class="form-control" id="edad" placeholder="Ingrese su edad" required onInput="evaluar()"/><br /></p>
+    <input type="submit" id="confirmar" class="btn btn-primary my-2" value="guardar!" disabled><br />
+    <style>
+        input{
+            size:10px;
+            color:darkslateblue;
+            border-color:lavender;
+        }
+    </style>
+    <script>
+        function evaluar(){
+            let edad = document.getElementById("edad").value;
+            if(edad>60){
+                document.getElementById("confirmar").disabled = true;
+                alert("Lo lamentamos y no queremos ofenderlo pero este juego esta hecho para personas mas jovenes");
+            }
+            else
+            {
+                document.getElementById("confirmar").disabled = false;
+            }
+        }
+    </script>
+</form>
+
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Listado</h4>
+      </div>
+      <div class="modal-body">
+        <p id="demo" onShow="myFunction(@Model.concursantes)"></p>
+
+        <script>
+            function myFunction(list) {
+                foreach (ConcursantesDTO item in list)
+                {
+                    document.getElementById("demo").innerHTML += item.apellido + ", " + item.nombre "<br>"; 
+                }
+            }
+        </script>
+      </div>
+    </div>
+  </div>
+</div>

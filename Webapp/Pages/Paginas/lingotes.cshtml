@@ -1,0 +1,47 @@
+@page
+@model LingotesModel
+
+<div class="text-center">
+    <font face="Star Wars" color=131F69>
+        <h1>Inscripcion para el Concurso de @Model.concurso</h1>
+    </font>
+</div>
+
+<form method="post">
+    <p>Nombre: <input class="form-control" asp-for="concursante.nombre" placeholder="Ingrese su nombre" required/><br /></p>
+    <p>Apellido: <input class="form-control" asp-for="concursante.apellido" placeholder="Ingrese su apellido" required/><br /></p>
+    <p>Edad:  <input class="form-control" asp-for="concursante.edad" placeholder="Ingrese su edad" required/><br /></p>
+    <p>Apto Fisico: 
+    <input class="form-control" type="file" placeholder="Suba su apto fisico" required /><br /></p>
+    <div>
+        <label for="party">Fecha de su visita al medico: </label>
+        <input class="form-control" type="date" id="apto" onInput="validacion()">
+    </div>
+    <input type="submit" class="btn btn-primary my-2" id="confirmar" value="guardar!" disabled><br />
+    <style>
+        input{
+            size:10px;
+            color:darkslateblue;
+            border-color:lavender;
+        }
+    </style>
+    <script>
+        function validacion(){
+            let apto = document.getElementById("apto").value;
+            var fechaMedica = new Date(apto);
+            fechaMedica.setDate(fechaMedica.getDate() + 1);
+            var today = new Date();
+            var unMesAntes = new Date();
+            unMesAntes.setMonth(unMesAntes.getMonth() - 1);
+            alert(unMesAntes);
+            if(fechaMedica > today || fechaMedica < unMesAntes){
+                document.getElementById("confirmar").disabled = true;
+                alert("Lo lamentamos pero preferimos tu salud que el entretenimiento. Queremos estar seguros que estan en perfectas condiciones. Vuelva con un apto medico, aqui estaremos esperando su regreso!");
+            }
+            else
+            {
+                document.getElementById("confirmar").disabled = false;
+            }
+        }
+    </script>
+</form>

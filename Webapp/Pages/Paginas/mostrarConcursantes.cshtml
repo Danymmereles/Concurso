@@ -1,0 +1,17 @@
+@page
+@model MostrarConcursantesModel
+
+<div class="text-center">
+    <font face="Star Wars" color=131F69 size=20px>
+        <h1>Ultimo Concursante Inscripto</h1>
+    </font>
+</div>
+
+<div class="text-center">
+    <p>
+        <font color=000000 face="Times New Roman" size=14px> Concurso: </font><font color=0024EC face="Courier" size=12px> @Model.persona.concurso </font><br />
+        <font color=000000 face="Times New Roman" size=10px> Apellido y Nombre: </font><font color=0024EC face="Courier" size=8px> @Model.persona.apellido, @Model.persona.nombre </font><br />
+        <font color=000000 face="Times New Roman" size=10px> Edad: </font><font color=000000 face="Courier" size=8px> @Model.persona.edad </font><br />
+        <font color=000000 face="Times New Roman" size=12px> Participante N°: </font><font color=000000 face="Courier" size=10px> @Model.persona.turno </font><br />
+    </p>
+</div> 
